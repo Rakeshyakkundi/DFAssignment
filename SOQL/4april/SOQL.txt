@@ -1,0 +1,13 @@
+
+Create Account 
+  
+Using insert
+================
+try{
+  Account acc = new Account();
+  acc.Name = 'New Jersey Milk';
+  insert acc;  
+}
+catch(Exception e){
+    System.debug('Error:'+ e);
+}
