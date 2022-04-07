@@ -1,11 +1,13 @@
 Fetch all fields from object in SOQL:
 ---------------------------------------------------------------
 
-FIELDS(ALL)—to select all the fields of an object.
-FIELDS(CUSTOM)—to select all the custom fields of an object.
-FIELDS(STANDARD)—to select all the standard fields of an object.
+FIELDS(ALL)—>to select all the fields of an object.
+FIELDS(CUSTOM)—>to select all the custom fields of an object.
+FIELDS(STANDARD)—>to select all the standard fields of an object.
 
 ----------------------------------------------------------------
 
 Query to get All fields from Contact
   SELECT FIELDS(ALL) FROM Contact LIMIT 20
+  SELECT FIELDS(CUSTOM) FROM Contact LIMIT 20
+  SELECT FIELDS(STANDARD) FROM Contact LIMIT 20

@@ -1,0 +1,67 @@
+public class CollectionList {
+    public static void FirstList(){
+        // create list
+        List<String> Color = new List<String>{'White','Black'};
+        Color.add('Red');
+        Color.add('Blue');
+        Color.add('Green');
+        System.debug(Color);
+        
+        // Get index of Blue
+        System.debug('Index of Blue :'+Color.indexOf('Blue'));
+        
+        // Get index 3
+        System.debug('Index value of 3 :'+Color.get(3));
+        
+        // check Color is Empty
+        System.debug('Is Color Empty :'+Color.isEmpty());
+        
+        // Remove Blue by using indexOf
+        Integer ix = Color.indexOf('Blue');
+        System.debug('Removed color'+Color.remove(ix));
+        System.debug('Colors :'+Color);
+        
+        //Find size of Color
+        System.debug('Size of Color List:'+Color.size());
+        
+        //set(index,element)
+        Color.set(0,'Pink');
+        System.debug('set White to Pink :'+Color);
+        
+        //sort
+        Color.sort();
+        System.debug('Sort Color :'+Color);
+        
+        //Clone to new List of String
+        List<String> CloneColor = Color.clone();
+        System.debug('CloneColor :'+CloneColor);
+        
+        //Clear CloneColor
+        CloneColor.clear();
+        System.debug('CloneColor clear :'+CloneColor);
+			
+	//Add new list using addAll
+	System.debug('Before Clone '+Color);
+        CloneColor.add('a1');
+        CloneColor.add('b1');
+        CloneColor.add('c1');
+	Color.addAll(CloneColor);
+	System.debug('After clone :'+Color);     
+        
+        //Check Red is present in Color
+        System.debug('Cleck Color contain Red elemet :'+Color.contains('Red'));
+        
+        //Check if Clone and Color list are equal
+        System.debug('Equal or not :'+Color.equals(CloneColor));
+        
+    }	
+}
+
+
+
+
+
+
+
+
+
