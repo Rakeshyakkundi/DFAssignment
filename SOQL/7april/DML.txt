@@ -1,0 +1,145 @@
+
+=================================================================================================
+create account 
+
+Account acc =  new Account(Name='Alex');
+insert acc;
+=================================================================================================
+Fetch created account
+
+Account acc =  [select id,Name from Account where Name='Alex'];
+System.debug(acc);
+==================================================================================================
+Update account phone no
+
+try{
+	Account acc =  [select id,Name from Account where id='0015j00000dCKpgAAG'];
+	acc.phone='9988776611';
+	update acc;
+	System.debug(acc);
+}
+catch(exception e)
+{
+	System.debug('Error :'+e);
+}
+===================================================================================================
+Delete account
+
+try{
+	Account acc =  [select id,Name from Account where id='0015j00000dCKpgAAG'];
+	delete(acc);
+	System.debug(acc);
+}
+catch(exception e)
+{
+	System.debug('Error :'+e);
+}
+=====================================================================================================
+undelete account
+
+Account acc = [select Id,Name from Account where Name Like 'Alex%' ALL ROWS];
+undelete acc;
+
+=====================================================================================================
+Bulk DML insert
+List<Account> accList = new List<Account> {
+    new Account(Name='test12',Phone='1223'),
+        new Account(Name='test123',Phone='12345'),
+        new Account(Name='test1234',Phone='12455'),
+        new Account(Name='test12345',Phone='21432353')};
+// Bulk insert all contacts with one DML call
+insert accList;
+
+=====================================================================================================
+Buld DML update
+List<Account> ItretAccount = [select id,Name,Phone from Account Where Name Like 'Test Case%'];
+List<Account> listToUpdate = new List<Account>();
+for(Account acc:ItretAccount){
+    acc.Phone='7778881212';
+    listToUpdate.add(acc);
+}
+update listToUpdate;
+
+========================================================================================================
+upsert(update or insert) Records
+
+Account zipt = new Account(Name='Zipt');
+insert zipt;
+zipt.Phone='11223344';
+Account yet = new Account(Name='yett',Phone='11223344');
+List<Account> UpdateeAcc =new List<Account>{zipt,yet};
+upsert UpdateeAcc;
+
+=========================================================================================================
+DML Exception 
+try{
+Account zipt = new Account();
+insert zipt;
+}
+catch(DmlException e){
+    System.debug('Exception :'+e.getMessage());
+}
+==========================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

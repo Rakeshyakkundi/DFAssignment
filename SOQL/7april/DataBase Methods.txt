@@ -1,0 +1,97 @@
+DataBase method :
+insert
+update
+upsert
+delete
+undelete
+merge
+
+Database method allOrNone parameter -> try to insert records even not accepting in some records like partially success.
+as like in dml if one fail to insert  all record fail it is not same in database.
+can get result even if success or failure
+
+-------------------------------------------------------------------------------------------------------------------------
+Insert data with valid and invalid form to accunt:
+
+List<Account> AccInsert = new List<Account> {
+    new Account(Name='1',Phone='111111111'),
+    new Account(Phone='222222222'),
+    new Account(Name='2',Phone='333333333'),
+    new Account(Phone='444444444')
+        };
+            
+Database.SaveResult[] insertList = Database.insert(AccInsert,false);
+
+for (Database.SaveResult sr : insertList) 
+{
+    if (sr.isSuccess()) 
+    {
+        System.debug('Successfully inserted contact. Contact ID: ' + sr.getId());
+    } 
+    else 
+{
+        for(Database.Error err : sr.getErrors()) 
+        {
+            System.debug('The following error has occurred.');
+            System.debug(err.getStatusCode() + ': ' + err.getMessage());
+            System.debug('Contact fields that affected this error: ' + err.getFields());
+ 	}
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------
+Working with related record:
+
+Account acct = new Account(Name='apexText0Account');
+insert acct;
+ID acctID = acct.id;
+
+Contact mario = new Contact(FirstName='apexTest0 Contact', LastName='Ruiz',Phone='415.555.1212', AccountId=acctID);
+Database.insert(mario);
+------------------------------------------------------------------------------------------------------------------------------
+Update database:
+
+Contact mario = [Select id from Contact where LastName Like 'Ruiz%'];
+mario.FirstName='ApexTest0';
+mario.LastName = 'Contact';
+Database.update(mario);
+
+-------------------------------------------------------------------------------------------------------------------------------
+update related recrd
+
+Contact getContact = [Select Account.Name,Name,FirstName from Contact where FirstName='ApexTest0' and LastName = 'Contact' Limit 1];
+getContact.Account.Target__c = 20000;
+System.debug(getContact);
+update getContact;			----> update contact
+update getContact.Account;		----> update Account through contact
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
