@@ -1,0 +1,44 @@
+Fetch all fields from object in SOQL:
+---------------------------------------------------------------
+
+FIELDS(ALL)—>to select all the fields of an object.
+FIELDS(CUSTOM)—>to select all the custom fields of an object.
+FIELDS(STANDARD)—>to select all the standard fields of an object.
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Query to get All fields from Contact
+  SELECT FIELDS(ALL) FROM Contact LIMIT 20
+  SELECT FIELDS(CUSTOM) FROM Contact LIMIT 20
+  SELECT FIELDS(STANDARD) FROM Contact LIMIT 20
+-------------------------------------------------------------------------------------------------------------------------
+Query from opportunity Ex:
+
+SELECT Name,Type,Amount,Probability FROM Opportunity where IsWon=True
+SELECT Name,Type,Amount,Probability FROM Opportunity where Probability<50
+SELECT Name,Type,Amount,Probability,Iswon FROM Opportunity where Probability<80 ORDER BY Name
+SELECT Name,Type,Amount,Probability,Iswon FROM Opportunity where Probability<80 ORDER BY Amount DESC 
+SELECT Name,Type,Amount,Probability,Iswon FROM Opportunity where Probability<80 ORDER BY Amount ASC
+SELECT Name,Type,Amount,Probability,Iswon FROM Opportunity where (Probability<80 and Amount<30000) ORDER BY Name
+
+------------------------------------------------------------------------------------------------------------------------------
+Assign in query
+String targetDepartment = 'Wingo';
+SELECT FirstName,LastName FROM Contact WHERE Department=:targetDepartment
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
