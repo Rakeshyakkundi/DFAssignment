@@ -27,7 +27,8 @@ String targetDepartment = 'Wingo';
 SELECT FirstName,LastName FROM Contact WHERE Department=:targetDepartment
 
 ------------------------------------------------------------------------------------------------------------------------------
-
+SELECT Name,(Select FirstName,LastName,Phone from Contacts) FROM Account where Rating='Cold'
+SELECT Name,(Select FirstName,LastName,Phone from Contacts where  Contact.FirstName='Babara') FROM Account where Rating='Cold' 
 
 
 

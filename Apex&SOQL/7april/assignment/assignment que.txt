@@ -1,0 +1,1 @@
+Create a Trigger that will update LastUpdate field in Contact object when we update a contact detail. 

@@ -1,0 +1,17 @@
+public class ContactDateUpdate {
+    public static boolean isOn=True;
+    public static void updateDate(Set<Id> setIds){
+        try{
+            isOn=False;
+            List<Contact> coo = [Select Id,LastUpdate__c from Contact where Id In:setIds];
+            for(Contact ca: coo){
+                ca.LastUpdate__c=DateTime.now();
+            }
+            update coo;
+            System.debug('Updated contact :'+coo);
+        }catch(Exception e){
+            System.debug('Exception :'+e);
+        }
+    }
+
+}

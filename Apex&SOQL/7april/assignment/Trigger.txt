@@ -1,0 +1,6 @@
+trigger ContactTrigger on Contact (after update) {
+    if(Trigger.isUpdate && ContactDateUpdate.isOn){
+        ContactDateUpdate.updateDate(Trigger.newMap.keySet());
+        System.debug(ContactDateUpdate.isOn);
+    }
+}
