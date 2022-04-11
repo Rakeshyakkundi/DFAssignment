@@ -1,0 +1,6 @@
+1.Create startDate and EndDate fields on Opportunity
+2.Apply valdation rules that EndDate should be greater then startDate
+3.Create Custom object name OpportunityExtension it should be Master-detail with Opportunity and add fields Date,Amount
+4.Create trigger to build slots for OpportunityExtension
+5.Create Trigger as OpportunityTrigger 
+6.Create apex class as OpportunityProcess
