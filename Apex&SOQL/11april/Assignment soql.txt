@@ -1,0 +1,63 @@
+1.Create rollup summary on Account named Revenue that sum the amount of account related to opportunity
+========================================================================================================================
+2.SOQL :List all account that revenue is greater than 1000
+-->[Select id,Name,No_Of_Opportunities__c,revenue__c from Account where revenue__c >1000]
+=========================================================================================================================
+3.APEX :List all account that revenue is greater than 1000 then filter out whose stage is Prospecting
+-->	List<Account> acc = [Select id,Name,No_Of_Opportunities__c,revenue__c from Account];
+	List<Account> fin = new List<Account>();
+	for(Account co:acc){
+   	 if(co.revenue__c > 1000){
+     	   System.debug(co);
+    		}
+	}
+=========================================================================================================================
+4.SOQL : List all opportunity 
+-->[SELECT Id, AccountId, Name, Amount,StageName FROM Opportunity]
+=========================================================================================================================
+5.Apex : List all opportunity where stage is Negotiation/Review
+-->	List<Opportunity> opp = [SELECT Id, AccountId, Name, Amount,StageName FROM Opportunity];
+	List<Opportunity> fin = new List<Opportunity>();
+	for(Opportunity co:opp){
+  	  if(co.StageName =='Negotiation/Review'){
+      		  System.debug(co);
+   		 }
+	}
+=========================================================================================================================
+6.Apex : List all Account where it is related to opportunity and stage is Negotiation/Review
+-->	List<Opportunity> opp = [SELECT Id, AccountId, Name, Amount,StageName FROM Opportunity];
+	List<Account> acc= new List<Account>();
+
+	for(Opportunity co:opp){
+   	 if(co.StageName =='Negotiation/Review'){
+     	   try{
+         	   Account a = [select Id, Name, Revenue__c, No_Of_Opportunities__c from Account where id=:co.AccountId ];
+        	   acc.add(a);
+         	   System.debug('Account :'+a);
+     	   }catch(Exception e){
+            System.debug('Error'+e);
+       			 }
+   		 }
+	}
+	System.debug('acc'+acc);
+=========================================================================================================================
+7.List all account whose revenue is greater then 1000 and sort according to revenue in desc format
+-->[Select id,Name,No_Of_Opportunities__c,revenue__c from Account where revenue__c >1000 ORDER BY  revenue__c  DESC]
+=========================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
