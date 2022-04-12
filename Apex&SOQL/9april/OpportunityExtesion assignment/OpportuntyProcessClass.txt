@@ -1,27 +1,20 @@
 public class OpportunityProcess {
-
+    
     public static Integer getDuration(Date startDate,Date endDate){
         return startDate.monthsBetween(endDate);
     }
     public static void main(List<Opportunity> opp){
         Opportunity op = [Select Id,Name,Amount,StartDate__c, EndDate__c from Opportunity Where Id IN :opp ];
-       
+        
         Decimal slotAmount;
         if(op.Amount == null){slotAmount = 0;}
         else{slotAmount = op.Amount / getDuration(op.StartDate__c,op.EndDate__c);}
-         
+        List<OpportunityExtension__c> obj = new List<OpportunityExtension__c>();
         
         for(Integer i=0;i<getDuration(op.StartDate__c,op.EndDate__c);i++){
-            OpportunityExtension__c obj = new OpportunityExtension__c();
-            obj.Amount__c = slotAmount;
-            obj.StartDate__c = op.StartDate__c.addMonths(i);
-            obj.EndDate__c = op.StartDate__c.addMonths(i+1);
-            obj.Opportunity__c = op.Id;
-            obj.Name = op.Name+'_Slot_'+i;
-            insert obj;
-            System.debug('Hi'+obj);
+			  obj.add(new OpportunityExtension__c(Amount__c=slotAmount,StartDate__c=op.StartDate__c.addMonths(i),EndDate__c=op.StartDate__c.addMonths(i+1),Opportunity__c=op.Id,Name=op.Name+'_Slot_'+i));	
         }   
-        
+        insert obj;
         
     }
 }
