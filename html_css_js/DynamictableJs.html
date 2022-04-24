@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>Dynamic Table</title>
+</head>
+
+<body>
+    <table align="center"></table>
+</body>
+<script>
+    let table = document.querySelector("table");
+    for (let num = 1; num <= 10; num++) {
+        const row = document.createElement("tr");
+        const column = document.createElement("td");
+        column.textContent = num;
+        row.appendChild(column);
+        table.appendChild(row);
+    }
+</script>
+
+</html>
