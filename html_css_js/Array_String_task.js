@@ -23,7 +23,7 @@ for(let i=0;i<str.length;i++){
         count = count+1;
     }
 }
-console.log("Word '",word,"' occurred ",count,"tmes.");
+console.log("Word '",word,"' occurred ",count,"times.");
 let exp = new RegExp(word,'g'); 
 const count = str.match(exp).length;
 console.log(count);
