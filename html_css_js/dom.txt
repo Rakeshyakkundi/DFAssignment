@@ -1,0 +1,52 @@
+Dom -> Document bobject model
+js ca be used to read/write/manipulate to Dom
+object oriented representation
+
+
+textContent --> display none as style then textContent still show the text 
+innerText  -> here text will not be displayed
+
+// console.log(document);
+// console.log(document.title);
+// document.title = "Todo Task";
+// console.log(document.forms);
+ 
+
+// GetElementById
+var headerTitle = document.getElementById('header-title');
+console.log(headerTitle);
+headerTitle.innerText = "Write task";
+//headerTitle.innerHTML = '<h3>Hello</h3>';
+
+headerTitle.style.borderBottom='solid 3px';
+
+// GetElementsByClass
+
+var items = document.getElementsByClassName('list-group-item');
+console.log(items);
+
+// items[0].textContent = 'Outer Text';
+//items[0].style.backgroundColor = '#f4f4f4';
+
+//for(let i=0;i<items.length;i++){
+//    items[i].style.backgroundColor = "#f4f4f4";
+//}
+
+//getElementByTagName
+//getElementsByTagName
+
+//query setector
+
+var header = document.querySelector("#header-div");
+header.style.borderBottom = 'solid 5px';
+
+//var input = document.querySelector('input');
+//input.value = 'hello world';
+
+//var submit = document.querySelector('input[type="submit"]');
+
+  
+
+
+
+

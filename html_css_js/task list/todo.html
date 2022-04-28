@@ -6,25 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo app JS</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="todo.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <header>Todo app</header>
+    <div id="header-div" class="wrapper">
+        <header id='header-title'>Todo app</header>
         <div class="inputField">
             <br>
-            <input type="text" placeholder="Task">
-            <button class="active">Submit</button>
+            <input type="text" placeholder="Task" id="name" class="input" />
+            <button type="button" id="btnClick" class="btn" onclick="addMore()">Submit</button>
+            <span id="error"></span>
         </div>
-        <ul class="todoList">
-            <li>Buy a book <span>  <button>Delete</button></span></li>
-            <li>Buy a pen <span>   <button>Delete</button></span></li>
-            <li>Buy a mobile <span><button>Delete</button></span></li>
-            <li>Buy a car <span>   <button>Delete</button></span></li>
-            
+        <ul id="box" class="todoList">
         </ul>
     </div>
+    <script src="todo.js "></script>
 </body>
 
 </html>
