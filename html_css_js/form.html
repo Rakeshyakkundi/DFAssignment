@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Div Table</title>
+    <title>Form Table</title>
     <script>
         function validation() {
             console.log(document.form_detail);
@@ -21,22 +21,22 @@
             <form action="" method="" name="form_detail" onsubmit="return validation()">
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
                     <label for="fname">First name:</label><br>
-                    <input type="text" id="fname" name="fname" value="John"><br>
+                    <input type="text" id="fname" name="fname" value="John" required="required"><br>
                 </div><br>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
                     <label for="lname">Last name:</label><br>
-                    <input type="text" id="lname" name="lname" value="Doe"><br><br></div><br>
+                    <input type="text" id="lname" name="lname" value="Doe" required="required"><br><br></div><br>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
                     <label for="email">Email:</label><br>
-                    <input type="email" id="email" name="email" value="xyz@gmail.com"><br><br></div><br>
+                    <input type="email" id="email" name="email" value="xyz@gmail.com" required="required"><br><br></div><br>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
 
                     <label for="age">Age:</label><br>
-                    <input type="number" id="age" name="age" value="18"><br><br></div><br>
+                    <input type="number" id="age" name="age" value="18" required="required"><br><br></div><br>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
 
                     <label for="gender">Gender:</label><br>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" required="required">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -304,7 +304,7 @@
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
 
                     <label for="accept"> I accept all the rules</label><br>
-                    <input type="checkbox" id="accept" name="accept" value="accept">
+                    <input type="checkbox" id="accept" name="accept" value="accept" required="required">
                     <br><br></div><br>
                 <input type="submit" value="Submit">
             </form>
