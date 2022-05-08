@@ -1,0 +1,26 @@
+.color-body {
+    background-color: antiquewhite;
+}
+
+.head-search {
+    background-color: rosybrown;
+}
+
+.center {
+    padding-top: 5px;
+    width: 40%;
+    border: 1px solid green;
+}
+
+p {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid rgb(24, 192, 142);
+    background-color: aquamarine;
+}
+
+.p-back-color {
+    margin: 10px;
+    border: 2px solid rgb(39, 155, 109);
+    background-color: aquamarine;
+}

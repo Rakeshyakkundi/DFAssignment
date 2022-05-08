@@ -1,0 +1,57 @@
+<template>
+    <div style="border: 1px solid black; width: 95%; height: 400px;background-color: rgb(102, 165, 228); margin-left: auto; margin-right: auto;">
+        
+    </div>
+<div style="border: 1px solid black; width: 95%; height: 850px;margin-left: auto; margin-right: auto; " class="color-body    ">
+    <br><br>
+    <div style="border: 1px solid black; width: 49%; height: 800px; margin-top: 10px;float: left">
+            <div class="slds-p-bottom_large slds-p-left_large" style="width:500px;margin-top: 10px;margin-left: auto; margin-right: auto;">
+                
+                <lightning-card title="Search Account">
+                    <div class="slds-m-around_medium"> 
+                        <lightning-input type="search" label="Search" onchange={handelKeyChange} class="slds-m-bottom_small" value={accountSingle}></lightning-input>
+                    </div>
+</lightning-card>
+</div>
+<div class="slds-p-bottom_large slds-p-left_large color-body" style="width:600px;margin-top: 10px;margin-left: auto; margin-right: auto;">
+
+<lightning-card >
+    <template for:each={accountListSingle} for:item="account" for:index="index">
+                        <p key={account.Id} class="p-back-color"> 
+                            <span key={account.Id} >Name : {account.Name}</span>
+                            <span key={account.Id} style="margin-left: 5em;">Industry : {account.Industry}</span>
+                            <span key={account.Id} style="margin-left: 5em;">Phone : {account.Phone}</span>
+                       </p>
+                    </template>
+</lightning-card>
+</div>
+
+</div>
+<div style="border: 1px solid black; width: 49%; height: 800px;float: right; margin-top: 10px;">
+    <template if:true={accountData1.data}>
+                    <template for:each={accountData1.data} for:item="acc">
+                                <article key={acc.Id} class="slds-card" style="width: 85%; margin-left: 50px; margin-top: 10px;">
+                                    <div class="slds-card__header slds-grid">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <a  class="slds-card__header-link slds-truncate" title="Accounts">
+                                                    <span>{acc.Name}</span>
+                                                    </a>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-card__body slds-card__body_inner center" >
+                                        <p key={acc.Id} > 
+                                            <span key={acc.Id} >Name : {acc.Name}</span>
+                                            <span key={acc.Id} style="margin-left: 3em;">Industry : {acc.Industry}</span>
+                                            <span key={acc.Id} style="margin-left: 3em;">Phone : {acc.Phone}</span>
+                                       </p>
+                                    </div>
+                                </article>
+                    </template>
+    </template>
+</div>
+</div>
+</template>
