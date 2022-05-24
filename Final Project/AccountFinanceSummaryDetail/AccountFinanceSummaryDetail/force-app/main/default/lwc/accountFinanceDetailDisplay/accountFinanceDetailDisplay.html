@@ -1,0 +1,114 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:false={chartTable}>
+        <span style="float:right;margin-right:50px;">
+            <button type="toggle" class="slds-button slds-button_brand" style="width: 70px;height:30px;" onclick={chartTableToggle}>Table</button>
+        </span>
+    </template>
+<template if:true={chartTable}>
+        <span style="float:right;margin-right:50px;">
+            <button type="toggle" class="slds-button slds-button_brand" style="width: 70px;height:30px;" onclick={chartTableToggle}>Chart</button>
+        </span>
+    </template>
+<br>
+<div class="slds-m-top_large slds-p-left_small slds-p-right_small slds-grid slds-gutters slds-wrap space">
+    <div class="slds-col bg-primary slds-p-around_small slds-m-around_small toggle">
+        <div class="slds-text-align_center slds-text-heading_medium white-color"> Total Target </div>
+        <div class="slds-text-align_center slds-text-heading_large white-color">${totalTarget}</div>
+    </div>
+    <div class="slds-col bg-primary slds-p-around_small slds-m-around_small toggle">
+        <div class="slds-text-align_center slds-text-heading_medium white-color">Total Pipeline </div>
+        <div class="slds-text-align_center slds-text-heading_large white-color">${totalPipeline}</div>
+    </div>
+    <div class="slds-col bg-primary slds-p-around_small slds-m-around_small toggle">
+
+        <div class="slds-text-align_center slds-text-heading_medium white-color">Total Deviation </div>
+        <div class="slds-text-align_center slds-text-heading_large white-color">{totalDeviation}%</div>
+    </div>
+</div>
+
+<lightning-card>
+    <template if:true={chartTable}>
+                <template if:false={checked}>
+                    <span style="float:right;margin-right:50px;">
+                        <button class="slds-button slds-button_brand" style="width: 70px;height:30px;" onclick={changeToggle}>Edit</button>
+                    </span>
+                </template>
+    <template if:true={checked}>
+                        <br/>
+                        <span style="float:right;margin-right:50px;">
+                            <lightning-button variant="Cancle" style="width: 90px;height:30px;" label="Cancle" title="Primary action with lighter look"  onclick={changeToggleCancle}></lightning-button>
+                            <!-- <lightning-button variant="Save" style="margin-left: 5px;" label="Save" title="Primary action" onclick={saveToggle} class="slds-m-left_x-small"></lightning-button> -->
+                            <button class="slds-button slds-button_brand" style="margin-left: 10px;" onclick={saveTarget}>Save</button>
+                        </span>
+                </template>
+    <br><br>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="abcClass" scope="col">
+                    <div class="slds-truncate " title="Month">Month</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate " title="Total Amount">Target Amount</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Pipeline Amount">Pipeline Amount</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Deviation">Deviation</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={data} for:item="a"> 
+                                <tr key={a.month}  class="slds-hint-parent">
+                                    <td data-label="Month">
+                                        <div class="slds-truncate" title="Month">{a.month}</div>
+                                    </td>
+                                    <td data-label="TotalAmount">
+                                        <template if:true={checked}>
+                                            <!-- <lightning-input onchange={getValue} name={a.month} style="width: 100px;"  type="number"  class="getValuesToggle" placeholder={a.totalAmount} min="1" max="15"></lightning-input> -->
+                                            <input type="number" onchange={getValue}   class="getValuesToggle" name={a.month} value={a.totalAmount} min="1" max="15">  
+                                        </template>
+            <template if:false={checked}>
+                                            <div class="slds-truncate" title="TotalAmount">${a.totalAmount}</div>
+                                        </template>
+            </td>
+            <td data-label="PipelineAmount">
+                <div class="slds-truncate" title="Pipeline">${a.pipeLineAmount}</div>
+            </td>
+            <td data-label="Deviation">
+                <div class="slds-truncate" title="Deviation">{a.Deviation}%</div>
+            </td>
+            </tr>
+            </template>
+        </tbody>
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Total">Total</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="TotalAmount">${totalTarget}</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="PipelineAmount">${totalPipeline}</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Deviation">{totalDeviation}%</div>
+                </th>
+            </tr>
+        </thead>
+    </table>
+    </template>
+    <!-- <template if:false={chartTable}> -->
+    <!-- <h1>Chart</h1> -->
+    <!-- <figure class="highcharts-figure"> -->
+    <div class="chartContainer slds-hide" lwc:dom="manual"></div>
+    <!-- </figure> -->
+    <!-- </template> -->
+</lightning-card>
+
+</template>

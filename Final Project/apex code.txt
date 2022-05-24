@@ -1,0 +1,84 @@
+public class AccountFinance {
+     public List<Decimal>  getTargetList(){
+        List<Account_Target__c > aTarget = [SELECT Date__c, Amount__c  FROM Account_Target__c  WHERE (Date__c>2022-04-01 AND Date__c<2023-04-01) AND Account__c='0015j00000dIWyeAAG' ORDER BY Date__c ASC];
+        //Default value in Target
+         List<Decimal> preTarget = new List<Decimal>();
+        for(Integer i=1;i<13;i++){
+            preTarget.add(0.00);
+        }
+         //System.debug('Pre Target :'+preTarget);
+         List<Decimal> myAmountTargetList = new List<Decimal>();
+        for(Integer i=0;i<aTarget.size();i++){
+            preTarget[aTarget[i].Date__c.month()-1] += aTarget[i].Amount__c;
+            //System.debug(aTarget[i].Amount__c+'----'+aTarget[i].Date__c.month());
+        }
+          
+         //preTarget is from Jan23 to March23 and April22 to december22
+         //System.debug('Pre Target :'+preTarget);
+         //Made preTarget value from April-22 to March-23 and Jan23 to March23
+         Decimal Jan = preTarget.remove(0);//remove index 0 
+         Decimal Feb = preTarget.remove(0);
+         Decimal March = preTarget.remove(0);
+         preTarget.add(Jan);preTarget.add(Feb);preTarget.add(March); //paste value to last of list
+         //System.debug('Pre Target :'+preTarget);
+         //
+         return preTarget;
+    }
+    
+    // method return a no of months from startdate to enddate
+    public  Integer getDuration(Date startDate,Date endDate){
+        return startDate.monthsBetween(endDate);
+    }
+    // Get the pipeline values through opportunity
+    public List<Decimal> getPielineList(){
+        List<Opportunity> aOppor = [SELECT Amount, EndDate__c, StartDate__c FROM Opportunity WHERE AccountId='0015j00000dIWyeAAG'];
+        //Predefine 0 value in list
+        List<Decimal> piLine = new List<Decimal>();
+        for(Integer i=1;i<13;i++){
+            piLine.add(0.00);
+        }
+       // System.debug(piLine);
+       // itterate through opportunity related to account
+        for(Integer i=0;i<aOppor.size();i++){
+             Decimal slotAmount;
+            Integer TotalMonth = getDuration(aOppor[i].StartDate__c,aOppor[i].EndDate__c);
+            if(aOppor[i].Amount == null){slotAmount = 0;}
+            else{slotAmount = aOppor[i].Amount / TotalMonth;}
+            //System.debug(aOppor[i]+'Total Month:'+TotalMonth+'Slot amount :'+slotAmount);
+            //a is an index of the month to store in pipeline list
+            Integer a = aOppor[i].StartDate__c.month();
+            for(Integer j=1;j<TotalMonth+1;j++){
+               // System.debug('Start month :'+a);
+                piLine[a-1] +=slotAmount;
+                a +=1;
+            }
+        }
+        //piLine is from Jan23 to March23 and April22 to december22
+        //System.debug(piLine);
+        //Made pipeLine value from April-22 to March-23 and Jan23 to March23
+        List<Decimal> pipeLine = piLine;
+        Decimal Jan = pipeLine.remove(0);//remove index 0 
+        Decimal Feb = pipeLine.remove(0);
+        Decimal March = pipeLine.remove(0);
+        pipeLine.add(Jan);pipeLine.add(Feb);pipeLine.add(March); //paste value to last of list
+        //System.debug(pipeLine);
+        return pipeLine;
+    }
+    public void getTargetDeviationList(){
+    List<Decimal> Target_TD = this.getTargetList();
+    List<Decimal> PipeLine_TD = this.getPielineList();
+    List<Decimal> tagDev_TD = new List<Decimal>();
+        //try catch for if target is 0 then it will be divided by 1 insted of 0
+        for(Integer k=0;k<Target_TD.size();k++){
+            try{
+            tagDev_TD.add(Math.rint(((PipeLine_TD[k]-Target_TD[k])/Target_TD[k] )*100));
+            System.debug(Target_TD[k]+'==='+PipeLine_TD[k]+'==='+Math.rint(((PipeLine_TD[k]-Target_TD[k])/Target_TD[k] )*100));
+            }
+            catch(Exception e){
+                tagDev_TD.add(Math.rint(((PipeLine_TD[k]-Target_TD[k])/1)*100));
+            	System.debug(Target_TD[k]+'==='+PipeLine_TD[k]+'==='+Math.rint(((PipeLine_TD[k]-Target_TD[k])/1 )*100));
+            }
+        }
+    System.debug(tagDev_TD);
+    }
+}

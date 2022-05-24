@@ -1,0 +1,20 @@
+SELECT Id, Amount__c,StartDate__c, Name,Opportunity__r
+FROM OpportunityExtension__c
+WHERE Id IN (SELECT Id FROM Opportunity__r  WHERE StageName='Negotiation/Review' AND AccountId='0015j00000dIWyeAAG')
+
+
+Opportunity:
+SELECT Id
+FROM Opportunity 
+WHERE StageName='Negotiation/Review' AND AccountId='0015j00000dIWyeAAG'
+
+Opportunity Etension:
+SELECT Id, Amount__c, Opportunity__c, StartDate__c, Name 
+FROM OpportunityExtension__c 
+WHERE StartDate__c>=2022-04-01 AND StartDate__c<2023-04-30
+
+Get all field:
+SELECT Id, Amount__c, Opportunity__c, StartDate__c, Name ,Opportunity__r.stageName 
+FROM OpportunityExtension__c  
+WHERE Date__c=THIS_FISCAL_YEAR AND Opportunity__r.StageName !='Won' AND Opportunity__r.StageName !='Lost'  AND Opportunity__r.AccountId = '0015j00000dIWyeAAG'
+
