@@ -14,6 +14,7 @@ const columnsDetail = [
 
 export default class AccountFinanceDetailDisplay extends LightningElement {
 
+@api recordId;
 totalTarget;
 totalPipeline;
 totalDeviation;
@@ -55,20 +56,45 @@ getValue(event){
 saveTarget(event){
     this.checked = !this.checked;
     // send data to apex
-    saveTargetAmount({targetData:JSON.stringify(this.mapData)});
+    saveTargetAmount({targetData:JSON.stringify(this.mapData)})
+    .then((results) => {
+        console.log('this result save taget',results);
+         getTargetDeviation({ accId:this.recordId })
+            .then((data) => {
+                console.log('this result',data);
+                this.totalTarget = data.totalTarget;
+                this.totalPipeline = data.totalPipeline;
+                this.totalDeviation = (Math.round(data.totalDeviation * 100) / 100).toFixed(2); 
+                this.data = data.dataValues; 
+                this.chartTarget = data.chartTarget;
+                this.chartPipeline = data.chartPipeline;
+                this.chartMonth = data.chartMonth;
+                console.log('Data=',data );
+                this.renderChart();    
+            })
+            .catch((error) => {
+                console.log(error,'this error');
+            });
+    })
+    .catch((error) => {
+        console.log(error,'this error');
+    });
     console.log('1','Map data :',this.mapData);
     console.log('2',typeof(this.mapData));
-    console.log('3',JSON.stringify(this.mapData));
+    //console.log('3',JSON.stringify(this.mapData));
+    console.log('MapData :',this.mapData);
     this.mapData= [];
-    
+    //refreshApex(this.accountSummary);
+   
+   
 }
 changeToggleCancle(event){
     this.checked = !this.checked;
     this.mapData= [];
 }
 
-    @api recordId;
-    //0015j00000dIWyeAAG
+    
+    /*
     @wire(getTargetDeviation,{accId:'$recordId'})
     accountSummary({data,error}){
          if (data) {
@@ -88,9 +114,27 @@ changeToggleCancle(event){
             console.log('Error',error);
         }
     };
-
+    */
+  
     // Charts
         connectedCallback() {
+            console.log('connectedCallback Hi');
+               getTargetDeviation({accId:this.recordId})
+                .then((data) => {
+                    console.log('connectedCallback  list :',this.data);
+                    this.totalTarget = data.totalTarget;
+                    this.totalPipeline = data.totalPipeline;
+                    this.totalDeviation = (Math.round(data.totalDeviation * 100) / 100).toFixed(2); 
+                    this.data = data.dataValues; 
+                    this.chartTarget = data.chartTarget;
+                    this.chartPipeline = data.chartPipeline;
+                    this.chartMonth = data.chartMonth;
+                    console.log('Data=',data );
+                    this.renderChart();
+                })
+                .catch((error) => {
+                    console.log('Error is', this.error); 
+                });
             Promise.all([
                 loadScript(this, HighCharts ),
 
