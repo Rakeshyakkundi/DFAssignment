@@ -1,0 +1,13 @@
+html -> tagname -- tagname
+<div> -> margin-top,left,right
+<p>
+<h1>
+<a>
+<img>
+<ul> --> list of item
+html - data : attributes -> want to store some private data like id for future process
+<div data-name="roll">Username</div>
+
+Block level -> div,p,h1,ul
+Inline -> span,img,a,label
+

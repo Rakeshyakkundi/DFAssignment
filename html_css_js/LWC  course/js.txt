@@ -1,0 +1,292 @@
+variable
+Data type
+null vs undefined 
+arrow function
+spread operator
+Destructuring
+string interpolation
+String method
+object method
+array method
+promises
+module import and export
+events
+setTimeout
+setInterval
+query selector
+================================================================================================================================
+variable :
+	const-> global variable,cannot recreate or cannot update,only function block only
+    var ,let ->  function level only...not support bock level
+	let -> not allow to redeclare variable , can be updated
+	var cour = "hi"
+	console.log(window); ->every thing in js is window
+	in console -> window.cour 
+		o/p-> hi
+	var gt = 5;
+	console.log(window.gt);
+	-------------------------
+	cour = "hello";
+	console.log(cour);
+	o/p => hello
+	-----------------------
+	let cour = "Jack"
+	console.lg(window.cour); -> not support global scope(window) ...... console.log(cour);
+	o/p=> error;
+	-------------------------
+	Lwc only let and const key word
+	
+====================================================================================================================================
+Data Type	:
+		number,string,boolean,bigInt,undefined,null,object,Symbol
+		
+		var x = 10.66;
+		var y = 5n; // bigInt
+		console.log(typeof x);
+		var name = "Jack Sparow";
+		var isMonday = true; // no double couts
+		var z ;// return undefined if not initialized
+		var obj={}; // return as object
+		var arr= []; // array is a type of object
+		var xy = null; // assign null
+		
+		var arr = ["a"];
+		arr.push("3");
+		console.log(arr);
+
+		var obbj = {
+			"full name":"jack sparrow",
+			age:23
+		}
+		console.log(obbj["full name"]);
+
+		undefined -> if variable is declared but not initialized then it is undefined
+		null -> i represents nothing or empty 
+======================================================================================================================================
+spread operator :
+	Expanding String -> list of array character
+	combining array -> add values to array
+	combining object -> add values to object(overlap the data if same key name)
+	create new shallow copy of array and object (.copy() in python [...arr] to make new copy)
+Ex:
+	let greeting = "Hello World"
+	let diesect = [...greeting];
+	console.log(diesect)
+	
+Ex: combine using spread operator
+	let a1 = ["jack","mark"]
+	let b1 = ["sparrow","zakar"]
+	let c1 = [...a1,...b1]
+	console.log(c1)
+
+Ex: let a1 = ["a","b","c"]
+	let b1 = [...a1]
+
+Ex: var arrObj = [
+    {name:"spt"},
+    {name:"jack"}
+	]
+	var arrToStr = JSON.stringify(arrObj)
+	var arrToObjCopy = JSON.parse(arrToStr)
+	console.log(arrToStr)
+	console.log(arrToObjCopy)
+====================================================================================================================================
+Destructuring : unpacking array or object into a bunch of variable
+	array Destructuring:
+		let arr = ["amazon","googl"]
+		let [c1,c2] = arr
+	object Destructuring:
+		let obj = {
+		title:"My company",
+		age:34,
+		type:"will smit"
+			}
+		let {title,age,type} = obj
+		console.log(title)
+		console.log(age)
+		console.log(type)
+=========================================================================================================================================
+String Interpolation:
+	let name = "Will Smit"
+	console.log(`Name is ${name}`);
+==========================================================================================================================================
+String Method:
+	let st1 = "hi this is sam"
+	console.log(st1.includes("hi"))
+	console.log(st1.indexOf("is"))
+	console.log(st1.startsWith("hi"))
+	console.log(st1.slice(0,3))
+	console.log(st1.toLowerCase())
+	console.log(st1.toUpperCase())
+	let spaceSt = "     hi   jack     "
+	console.log(spaceSt.trim())
+==========================================================================================================================================
+Object and Json operations(javascript object notation):
+	Object.keys()
+	Object.values()
+	JSON.stringify()
+	JSON.parse()
+	
+Ex:
+	let obj = {
+    name:"Sam",
+    age:53,
+    place:"India"
+	}
+	let onlyKey = Object.keys(obj) // get only keys
+	let onlyValues = Object.values(obj) // get only values
+	console.log(onlyValues+" "+onlyKey)
+	
+Ex(stringify):
+	let obj = {
+    name:"Sam",
+    age:53,
+    place:"India"
+	}
+	let st1 =JSON.stringify(obj)
+	console.log(typeof st1+":"+st1)
+	
+Ex(parse):
+	let obj = {
+    name:"Sam",
+    age:53,
+    place:"India"
+	}
+	let st1 =JSON.stringify(obj)
+	let st2 = JSON.parse(st1)
+	console.log(typeof st2+":"+st2.name)
+===============================================================================================================================================
+Array method:
+	Map():
+		Syntax: arrayList.methodName(function(currentItem,index,actualArray){
+		})
+		let arr=[2,34,5,6,7]
+		let newArr = arr.map(function(currentItem,index,array){
+			console.log(`${currentItem}  ${index}   ${array}`)
+			return currentItem
+		})
+		console.log(newArr)
+		o/p-> 	2  0   2,34,5,6,7
+				34 1   2,34,5,6,7
+				5  2   2,34,5,6,7
+				6  3   2,34,5,6,7
+				7  4   2,34,5,6,7
+		map return an array : 2,34,5,6,7 
+		
+	Filter():
+		let arr=[2,34,5,6,7]
+		let newarr = arr.filter(function(currentItem,index,array){
+			//console.log(`${currentItem}  ${index}   ${array}`)
+			return currentItem>5
+		})
+		console.log(newarr)
+		o/p -> [34,6,7]
+			
+	Every():
+		let age=[22,34,15,36,27]
+		let newarr = age.every(function(currentItem,index,array){
+			return currentItem>=18
+		})
+		console.log(newarr) // return true if all age in more then 18 or else return false
+		
+	Some():
+		let ageList=[22,34,18,36,27]
+		let oneCondition = ageList.some(function(currentItem,index,array){
+			return currentItem==18
+		})
+		console.log(oneCondition) // return true if any one element satasify condition
+	
+	sort():
+	string
+		let  strSort = ["sam","jack","carl"]
+		console.log(strSort.sort())
+	number
+		let  strSort = [5,4,9,11,20,0,4]
+		let sortVal = strSort.sort(function(a,b){
+			return a-b									// a-b =>accending, b-a => decending
+		})
+		console.log(sortVal) 
+		
+	reduce():
+	let  numSum = [5,4,9,11,20,0,4]
+	let sortVal = numSum.reduce(function(total,currentItem){
+		return total+currentItem
+	},0)
+	console.log(sortVal) // add all the values in list
+	
+	forEach():
+	let  numSum = [5,4,9,11,20,0,4]
+	numSum.forEach(function(i){
+		console.log(i)
+	})
+========================================================================================================================================================
+promise:
+	is an object . use to handle asynchronus operations in js
+	pending -> fulfilled()
+			-> rejected()
+	use in fetching data from server
+	use in loading static file from system
+	Ex:
+		function checkSuccess(data){
+		return new Promise(function(resolve,reject){
+			if(data==="success"){
+				return resolve("success")
+			}else{
+				return resolve("unsuccess")
+				}
+			})  
+		}
+		checkSuccess("success")
+		.then(function(result){
+			return result.json()    // then return a promise
+		})
+		.then(function(result){		// catch promise in another then
+			console.log(result)
+		})
+		.catch(function(error){
+			console.log(error)
+		})
+========================================================================================================================================================
+Import and Export:
+		script.js:
+			//import minus,{PI,add} from './utils.js'
+			//console.log(PI)
+			//console.log(add(1,2))
+			//console.log(minus(1,2))
+
+			import * as Utils from './utils.js'
+			console.log(Utils.PI)
+			console.log(Utils.add(1,2))
+			console.log(minus(1,2)) // default not in all import 
+		Utils.js:
+			let PI=3.14
+			function add(a,b){
+				return (a+b)
+			}
+			export {PI,add}
+			export default function minus(a,b){
+				return (a-b)
+			}
+		Html:
+			<body>
+				<script type="module" src="script.js"></script>
+			</body>
+================================================================================================================================================================
+querySelector -> return the first element that matches a selector in document.
+querySelectorAll -> return all element that matches as a static nodelist object.
+	single:
+		let element = document.querySelector('.diesect')
+		console.log(element)
+		console.log(element.innerText)
+		element.style.color = "red"
+	many:
+		let element = document.querySelectorAll('div')
+		console.log(element)
+		Array.from.(element).forEach(function(item){ --> convert static list to object
+			item.style.color = "green"
+		})
+In Lwc it is 
+	let element = this.template.querySelector('.diesect')
+================================================================================================================================================================
+Event:
+	
